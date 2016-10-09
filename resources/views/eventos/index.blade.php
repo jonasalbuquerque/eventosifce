@@ -49,15 +49,12 @@
                                         </form>
                                     </td>
                                 @else
-                                    <td class="text-right">
-                                        <a class="btn btn-primary" href="{{ route('eventos.show', $evento->id) }}"><i class="glyphicon glyphicon-eye-open"></i> Ver evento</a>
-                                        <a class="btn btn-success" href="{{ url('participar/'.$evento->id) }}"><i class="glyphicon glyphicon-plus"></i> Participar</a> 
-                                    </td>
-
-                                <!--Verifica se o usuario está inscrito no evento 
-
                                     @foreach($evento->users as $inscrito)
                                         @if(Auth::user()->id == $inscrito->id)
+                                            <td class="text-right">
+                                                <a class="btn btn-primary" href="{{ route('eventos.show', $evento->id) }}"><i class="glyphicon glyphicon-eye-open"></i> Ver evento</a>
+                                            </td>
+                                        @else
                                             <td class="text-right">
                                                 <a class="btn btn-primary" href="{{ route('eventos.show', $evento->id) }}"><i class="glyphicon glyphicon-eye-open"></i> Ver evento</a>
                                                 <a class="btn btn-success" href="{{ url('participar/'.$evento->id) }}"><i class="glyphicon glyphicon-plus"></i> Participar</a> 
@@ -65,7 +62,6 @@
                                         @endif
                                     @endforeach
 
-                                -->
                                 @endif
                             </tr>
                         @endforeach

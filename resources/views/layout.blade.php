@@ -44,6 +44,7 @@
                     <li class="active"><a href="{{url('eventos')}}">Home</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#contact">Contact</a></li>
+                    <li><a href="{{url('relatorio')}}">Relatório</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
 
