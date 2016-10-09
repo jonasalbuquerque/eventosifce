@@ -41,9 +41,11 @@ class EventoController extends Controller {
 	public function store(Request $request)
 	{
 		$evento = new Evento();
-		$evento->nome = $request->nome;
+		$evento->titulo = $request->titulo;
 		$evento->data = $request->data;
 		$evento->vagas = $request->vagas;
+		$evento->local = $request->local;
+		$evento->descricao = $request->descricao;
 		$evento->admin_id = Auth::user()->id;
 		
 		$evento->save();
@@ -107,6 +109,12 @@ class EventoController extends Controller {
 		$evento->delete();
 
 		return redirect()->route('eventos.index')->with('message', 'Item deleted successfully.');
+	}
+
+	public function participar($id){
+		$evento = Evento::find($id);
+		$evento->users()->save(Auth::user());
+		return redirect('eventos');
 	}
 
 }

@@ -4,7 +4,7 @@
     <div class="page-header clearfix">
         <h1>
             <i class="glyphicon glyphicon-align-justify"></i> Eventos
-            <a class="btn btn-success pull-right" href="{{ route('eventos.create') }}"><i class="glyphicon glyphicon-plus"></i> Create</a>
+            <a class="btn btn-success pull-right" href="{{ route('eventos.create') }}"><i class="glyphicon glyphicon-plus"></i> Criar novo evento</a>
         </h1>
 
     </div>
@@ -18,11 +18,11 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Nome</th>
+                            <th>Titulo</th>
                             <th>Data</th>
                             <th>Vagas</th>
                             <th>Local</th>
-                            <th>Anfitrião</th>
+                            <th>Responsável</th>
                             
                             <th class="text-right">OPTIONS</th>
                         </tr>
@@ -32,10 +32,10 @@
                         @foreach($eventos as $evento)
                             <tr>
                                 <td>{{$evento->id}}</td>
-                                <td>{{$evento->nome}}</td>
+                                <td>{{$evento->titulo}}</td>
                                 <td>{{$evento->data}}</td>
-                                <td>{{$evento->vagas}}</td>
-                                <td></td>
+                                <td>{{$evento->vagas - $evento->users()->count()}} / {{$evento->vagas}}</td>
+                                <td>{{$evento->local}}</td>
                                 <td>{{App\User::find($evento->admin_id)->name}}</td>
 
                                 @if (Auth::user()->id == $evento->admin_id)
@@ -49,10 +49,23 @@
                                         </form>
                                     </td>
                                 @else
-                                <td class="text-right">
-                                    <a class="btn btn-primary" href="{{ route('eventos.show', $evento->id) }}"><i class="glyphicon glyphicon-eye-open"></i> Ver evento</a>
-                                    <a class="btn btn-success" href="{{ route('eventos.edit', $evento->id) }}"><i class="glyphicon glyphicon-plus"></i> Participar</a> 
-                                </td>
+                                    <td class="text-right">
+                                        <a class="btn btn-primary" href="{{ route('eventos.show', $evento->id) }}"><i class="glyphicon glyphicon-eye-open"></i> Ver evento</a>
+                                        <a class="btn btn-success" href="{{ url('participar/'.$evento->id) }}"><i class="glyphicon glyphicon-plus"></i> Participar</a> 
+                                    </td>
+
+                                <!--Verifica se o usuario está inscrito no evento 
+
+                                    @foreach($evento->users as $inscrito)
+                                        @if(Auth::user()->id == $inscrito->id)
+                                            <td class="text-right">
+                                                <a class="btn btn-primary" href="{{ route('eventos.show', $evento->id) }}"><i class="glyphicon glyphicon-eye-open"></i> Ver evento</a>
+                                                <a class="btn btn-success" href="{{ url('participar/'.$evento->id) }}"><i class="glyphicon glyphicon-plus"></i> Participar</a> 
+                                            </td>
+                                        @endif
+                                    @endforeach
+
+                                -->
                                 @endif
                             </tr>
                         @endforeach

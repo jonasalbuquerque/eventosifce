@@ -17,9 +17,12 @@
             <form action="{{ route('eventos.store') }}" method="POST">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="well well-sm">
-                    Nome  <input type="text" name="nome"><br>
-                    Data  <input type="text" name="data"><br>
+                    Título  <input type="text" name="titulo"><br>
+                    Data  <input type="text" name="data" placeholder="AAAA/MM/DD"><br>
                     Vagas  <input type="text" name="vagas"><br>
+                    Local  <input type="text" name="local"><br>
+                    Descricao <textarea name="descricao"></textarea>
+
                 </div>
 
                 

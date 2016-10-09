@@ -28,6 +28,5 @@ Auth::routes();
 Route::resource("eventos","EventoController");
 Route::resource("alunos","AlunoController");
 Route::resource("cursos","CursoController");
-Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('participar/{id}', 'EventoController@participar');

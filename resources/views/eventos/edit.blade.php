@@ -13,17 +13,23 @@
 
     <div class="row">
         <div class="col-md-12">
+            {{ Form::model($evento, ['url' => ['eventos', $evento->id], 'files' => true]) }}
 
-            <form action="{{ route('eventos.update', $evento->id) }}" method="POST">
-                <input type="hidden" name="_method" value="PUT">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                {{ csrf_field() }}
+                {{ method_field('PUT') }}
 
-                
                 <div class="well well-sm">
-                    <button type="submit" class="btn btn-primary">Save</button>
-                    <a class="btn btn-link pull-right" href="{{ route('eventos.index') }}"><i class="glyphicon glyphicon-backward"></i>  Back</a>
+                  {{ Form::text('titulo', null) }}
                 </div>
-            </form>
+                <div class="well well-sm">
+                  {{ Form::textarea('descricao', null) }}
+                </div>
+
+                <div class="well well-sm">
+                      {{ Form::submit('Salvar', array('class' => 'btn btn-primary')) }}
+                      <a class="btn btn-link pull-right" href="{{ route('eventos.index') }}"><i class="glyphicon glyphicon-backward"></i>  Back</a>                      
+                </div>
+            {{ Form::close() }}
 
         </div>
     </div>
